@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category-service';
 import { Category } from '../../../models/category';
@@ -32,6 +32,15 @@ export class CategoryList {
 
  categories=toSignal(this.categoryService.getAll())
 
+delete(id){
+  this.categoryService.delete(id).subscribe({
+    next: () =>{
+      alert('Kategori başarıyla silindi');
+      window.location.reload();
 
+    },
+    error:(err)=>console.log(err)
+  })
+}
 
 }
